@@ -23,7 +23,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Musician> filteredMusicians;
-    private final FilteredList<Band> filteredBands;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,7 +35,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMusicians = new FilteredList<>(this.addressBook.getMusicianList());
-        filteredBands = new FilteredList<>(this.addressBook.getBandList());
     }
 
     public ModelManager() {
@@ -124,7 +122,9 @@ public class ModelManager implements Model {
         requireAllNonNull(band);
         addressBook.addBand(band);
     }
-  
+
+
+
     //=========== Filtered Musician List Accessors =============================================================
 
     /**
@@ -142,28 +142,7 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
-    /**
-     * Updates the {@code FilteredMusicianList} to contain all musicians in the {@code FilteredBands}.
-     */
-    public void updateFilteredMusicianListFromBands() {
-        requireNonNull(filteredBands);
-        for (Band b : filteredBands) {
-            filteredMusicians.addAll(b.getMusicians());
-        }
-    }
 
-    //=========== Filtered Band List Accessors =============================================================
-
-    @Override
-    public ObservableList<Band> getFilteredBandList() {
-        return filteredBands;
-    }
-
-    @Override
-    public void updateFilteredBandList(Predicate<Band> predicate) {
-        requireNonNull(predicate);
-        filteredBands.setPredicate(predicate);
-    }
 
     @Override
     public boolean equals(Object other) {

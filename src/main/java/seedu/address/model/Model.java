@@ -78,14 +78,8 @@ public interface Model {
      */
     void setMusician(Musician target, Musician editedMusician);
 
-    boolean hasBand(Band band);
-
-    void addBand(Band band);
-
     /** Returns an unmodifiable view of the filtered musician list */
     ObservableList<Musician> getFilteredMusicianList();
-
-    ObservableList<Band> getFilteredBandList();
 
     /**
      * Updates the filter of the filtered musician list to filter by the given {@code predicate}.
@@ -93,10 +87,6 @@ public interface Model {
      */
     void updateFilteredMusicianList(Predicate<Musician> predicate);
 
-    void updateFilteredBandList(Predicate<Band> predicate);
-
-    void updateFilteredMusicianListFromBands();
-  
     /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
