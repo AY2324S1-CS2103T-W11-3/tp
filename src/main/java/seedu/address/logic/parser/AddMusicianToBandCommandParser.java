@@ -7,32 +7,32 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddMusiciantoBandCommand;
+import seedu.address.logic.commands.AddMusicianToBandCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new AddMusiciantoBandCommand object
  */
-public class AddMusiciantoBandCommandParser {
+public class AddMusicianToBandCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddMusiciantoBandCommand
      * and returns an AddMusiciantoBandCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddMusiciantoBandCommand parse(String args) throws ParseException {
+    public AddMusicianToBandCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_BINDEX, PREFIX_MINDEX);
         if (!arePrefixesPresent(argMultimap, PREFIX_BINDEX, PREFIX_MINDEX) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddMusiciantoBandCommand.MESSAGE_USAGE));
+                    AddMusicianToBandCommand.MESSAGE_USAGE));
         }
         try {
             Index bandIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_BINDEX).get());
             Index musicianIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MINDEX).get());
-            return new AddMusiciantoBandCommand(bandIndex, musicianIndex);
+            return new AddMusicianToBandCommand(bandIndex, musicianIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMusiciantoBandCommand.MESSAGE_USAGE), pe);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMusicianToBandCommand.MESSAGE_USAGE), pe);
         }
     }
 
