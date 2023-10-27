@@ -7,11 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MINDEX;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+<<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/band/AddMusiciantoBandCommandParser.java
 import seedu.address.logic.commands.band.AddMusicianToBandCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
+========
+import seedu.address.logic.commands.AddMusicianToBandCommand;
+>>>>>>>> origin/editBandCommands:src/main/java/seedu/address/logic/parser/AddMusicianToBandCommandParser.java
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

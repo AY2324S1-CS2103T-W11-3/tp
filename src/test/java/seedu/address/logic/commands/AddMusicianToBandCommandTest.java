@@ -14,10 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.band.AddBandCommand;
-import seedu.address.logic.commands.band.AddMusicianToBandCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.musician.AddCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -59,14 +56,14 @@ public class AddMusicianToBandCommandTest {
         CommandResult commandResult = new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
 
         assertEquals(String.format(AddMusicianToBandCommand.MESSAGE_SUCCESS,
-                        Messages.format(modelBandStub.bandsAdded.get(bandIndex),
-                                modelBandStub.musiciansAdded.get(musicianIndex))),
+                Messages.format(modelBandStub.bandsAdded.get(bandIndex),
+                        modelBandStub.musiciansAdded.get(musicianIndex))),
                 commandResult.getFeedbackToUser());
         assertEquals(validBand, modelBandStub.bandsAdded.get(bandIndex));
         assertEquals(validBand.getMusicians(), modelBandStub.bandsAdded.get(bandIndex).getMusicians());
     }
     @Test
-    public void execute_duplicateMusicianAddedtoBand_throwsCommandException() throws Exception {
+    public void execute_duplicateMusicianAddedToBand_throwsCommandException() throws Exception {
         AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
                 new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
 
@@ -163,12 +160,12 @@ public class AddMusicianToBandCommandTest {
         }
 
         @Override
-        public void updateFilteredBandList(Predicate<Band> predicate) {
+        public void updateFilteredMusicianList(int bandIndex) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredBandMusicianList(Predicate<Band> predicate) {
+        public void updateFilteredBandList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
