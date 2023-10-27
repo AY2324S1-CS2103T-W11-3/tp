@@ -15,7 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.band.AddBandCommand;
-import seedu.address.logic.commands.band.AddMusiciantoBandCommand;
+import seedu.address.logic.commands.band.AddMusicianToBandCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.musician.AddCommand;
 import seedu.address.model.AddressBook;
@@ -29,26 +29,26 @@ import seedu.address.model.musician.UniqueMusicianList;
 import seedu.address.testutil.BandBuilder;
 import seedu.address.testutil.MusicianBuilder;
 
-public class AddMusiciantoBandCommandTest {
+public class AddMusicianToBandCommandTest {
 
     @Test
     public void constructor_nullMusician_throwsNullPointerException() {
         Index bandIndex = Index.fromOneBased(1);
-        assertThrows(NullPointerException.class, () -> new AddMusiciantoBandCommand(bandIndex, null));
+        assertThrows(NullPointerException.class, () -> new AddMusicianToBandCommand(bandIndex, null));
     }
     @Test
     public void constructor_nullBand_throwsNullPointerException() {
         Index musicianIndex = Index.fromOneBased(1);
-        assertThrows(NullPointerException.class, () -> new AddMusiciantoBandCommand(null, musicianIndex));
+        assertThrows(NullPointerException.class, () -> new AddMusicianToBandCommand(null, musicianIndex));
     }
     @Test
     public void constructor_nullBandAndMusician_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddMusiciantoBandCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddMusicianToBandCommand(null, null));
     }
     @Test
     public void execute_musicianAcceptedByModel_addSuccessful() throws Exception {
-        AddMusiciantoBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
-                new AddMusiciantoBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
 
         Musician validMusician = new MusicianBuilder().build();
         Band validBand = new BandBuilder().build();
@@ -56,9 +56,9 @@ public class AddMusiciantoBandCommandTest {
         CommandResult addBandCommandResult = new AddBandCommand(validBand).execute(modelBandStub);
         Index bandIndex = Index.fromOneBased(1);
         Index musicianIndex = Index.fromOneBased(1);
-        CommandResult commandResult = new AddMusiciantoBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
+        CommandResult commandResult = new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
 
-        assertEquals(String.format(AddMusiciantoBandCommand.MESSAGE_SUCCESS,
+        assertEquals(String.format(AddMusicianToBandCommand.MESSAGE_SUCCESS,
                         Messages.format(modelBandStub.bandsAdded.get(bandIndex),
                                 modelBandStub.musiciansAdded.get(musicianIndex))),
                 commandResult.getFeedbackToUser());
@@ -67,8 +67,8 @@ public class AddMusiciantoBandCommandTest {
     }
     @Test
     public void execute_duplicateMusicianAddedtoBand_throwsCommandException() throws Exception {
-        AddMusiciantoBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
-                new AddMusiciantoBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
+        AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand modelBandStub =
+                new AddMusicianToBandCommandTest.ModelStubAcceptingMusicianAddedToBand();
 
         Musician validMusician = new MusicianBuilder().build();
         Band validBand = new BandBuilder().build();
@@ -77,11 +77,11 @@ public class AddMusiciantoBandCommandTest {
         Index bandIndex = Index.fromOneBased(1);
         Index musicianIndex = Index.fromOneBased(1);
         CommandResult firstAddMusiciancommandResult =
-                new AddMusiciantoBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
+                new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
 
         assertThrows(CommandException.class,
-                AddMusiciantoBandCommand.MESSAGE_DUPLICATE_MUSICIAN, () ->
-                        new AddMusiciantoBandCommand(bandIndex, musicianIndex).execute(modelBandStub));
+                AddMusicianToBandCommand.MESSAGE_DUPLICATE_MUSICIAN, () ->
+                        new AddMusicianToBandCommand(bandIndex, musicianIndex).execute(modelBandStub));
     }
     /**
      * A default model stub that have all of the methods failing.
@@ -200,7 +200,7 @@ public class AddMusiciantoBandCommandTest {
     /**
      * A Model stub that always accept the musician being added into the band.
      */
-    private class ModelStubAcceptingMusicianAddedToBand extends AddMusiciantoBandCommandTest.ModelStub {
+    private class ModelStubAcceptingMusicianAddedToBand extends AddMusicianToBandCommandTest.ModelStub {
         final UniqueBandList bandsAdded = new UniqueBandList();
         final UniqueMusicianList musiciansAdded = new UniqueMusicianList();
         @Override
